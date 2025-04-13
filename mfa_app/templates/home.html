@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
+=======
+    {% load static %}
+>>>>>>> origin/master
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <style>
+<<<<<<< HEAD
         /* General body styles */
         body {
             font-family: Arial, sans-serif;
@@ -97,5 +102,162 @@
     <footer>
         &copy; 2024 Multi-Factor Authentication Project. All rights reserved.
     </footer>
+=======
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.8;
+            background-color:#f9f9f9;
+            color: #333;
+        }
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px 20px;
+            color:#fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid #444;
+        }
+        
+        .header-container h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align:center;
+        }
+        
+        .logout {
+            color: #fff;
+            background: #e74c3c;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .logout:hover {
+            background: #c0392b;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            min-height: calc(100vh - 120px);
+        }
+        
+        .content-container {
+            max-width: 900px;
+            text-align: justify;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .hidden-paragraph {
+            display: none;
+            margin: 15px 0;
+            padding: 15px;
+            font-size: 18px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: transform 0.2s ease-in-out, opacity 0.3s ease;
+        }
+        
+        .hidden-paragraph:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+        
+        .hidden-paragraph a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .hidden-paragraph a:hover {
+            color: #2980b9;
+        }  
+        @media (max-width: 768px) {
+            .header-container h1 {
+                font-size: 1.6rem;
+            }
+        
+            .logout {
+                padding: 6px 12px;
+            }
+        
+            .content-container {
+                max-width: 720px;
+            }
+        
+            .hidden-paragraph {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container h1 {
+                font-size: 1.4rem;
+            }
+        
+            .logout {
+                font-size: 14px;
+            }
+        
+            .content-container {
+                max-width: 100%;
+                padding: 15px;
+            }
+        }        
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>🔐 You are secured! 🔐</h1>
+            <a href="{% url 'signup' %}" class="logout">Logout</a>
+        </div>
+    </header>
+    <main>
+        <div class="content-container">
+            <p class="hidden-paragraph" id="para1">
+                Multi-Factor Authentication (MFA) is a critical security measure in today’s digital landscape. With increasing cyber threats, relying solely on passwords is no longer enough. MFA provides an extra layer of protection by requiring multiple forms of verification, such as passwords, tokens, and biometrics, making unauthorized access significantly harder.
+            </p>
+
+            <p class="hidden-paragraph" id="para2">
+                In our project, we have implemented an advanced MFA system that integrates three key components: password authentication, session-based tokens, and face recognition. The system ensures robust security by combining traditional and modern authentication methods. Users must first authenticate using a secure password, followed by a session token, and finally validate their identity with face recognition technology.
+            </p>
+
+            <p class="hidden-paragraph" id="para3">
+                For more information about this project, you can visit our GitHub repository:
+                <a href="https://github.com/your-repository-link" target="_blank">MFA Project on GitHub</a>.
+            </p>
+        </div>
+    </main>
+    <!-- JavaScript Logic -->
+    <script>
+        let currentParagraph = 0;
+        const paragraphs = document.querySelectorAll('.hidden-paragraph');
+
+        function showNextParagraph() {
+            if (currentParagraph < paragraphs.length) {
+                paragraphs[currentParagraph].style.display = "block";
+                currentParagraph++;
+            }
+        }
+
+        document.body.addEventListener("click", showNextParagraph);
+
+        window.onload = showNextParagraph;
+    </script>
+>>>>>>> origin/master
 </body>
 </html>

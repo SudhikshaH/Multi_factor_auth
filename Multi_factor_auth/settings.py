@@ -78,7 +78,11 @@ WSGI_APPLICATION = 'Multi_factor_auth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+<<<<<<< HEAD
         'NAME':'profiles1',
+=======
+        'NAME':'profiles2',
+>>>>>>> origin/master
         'USER':'root',
         'PASSWORD':'Sudhi!803',
         'HOST':'localhost',
@@ -93,9 +97,17 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+<<<<<<< HEAD
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+=======
+        'OPTIONS':{'user_attributes':('name','email')},
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS':{'min_length':8},
+>>>>>>> origin/master
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
