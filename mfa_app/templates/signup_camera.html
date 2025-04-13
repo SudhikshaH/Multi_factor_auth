@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup - Capture Face</title>
+</head>
+<body>
+    <h2>Signup - Capture Your Face</h2>
+    <video id="video" autoplay muted></video>
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <form method="POST" action="{% url 'signup_camera' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="face-image" id="image-input" style="display:none;">
+        <button type="button" id="capture-btn">Capture & Submit</button>
+    </form>
+
+    <script>
+            let videoStream;
+        
+            // Start the camera
+            async function startCamera() {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    const video = document.getElementById("video");
+                    video.srcObject = stream;
+                    videoStream = stream;
+                } catch (error) {
+                    console.error("Could not access webcam:", error);
+                    alert("Please allow access to the webcam for face capture.");
+                }
+            }
+        
+            // Capture the image from the video feed
+            async function captureImage() {
+                const canvas = document.getElementById('canvas');
+                const context = canvas.getContext('2d');
+                const video = document.getElementById("video");
+        
+                // Set canvas dimensions to match video feed
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+        
+                // Draw the current video frame onto the canvas
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+                // Convert canvas content to a blob
+                const blob = await new Promise(resolve =>
+                    canvas.toBlob(blob => resolve(blob), 'image/png')
+                );
+        
+                // Attach the blob as a file to the hidden input
+                const fileInput = document.getElementById('image-input');
+                const file = new File([blob], "captured_face.png", { type: "image/png" });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files;
+        
+                // Submit the form automatically
+                document.forms[0].submit();
+            }
+        
+            // Event listener for the "Capture & Submit" button
+            document.getElementById("capture-btn").addEventListener("click", captureImage);
+        
+            // Start the camera when the page loads
+            window.addEventListener("load", startCamera);
+        
+    </script>
+</body>
+</html>

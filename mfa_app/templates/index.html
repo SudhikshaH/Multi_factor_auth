@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>login</title>
+</head>
+<body>   
+    <div class="container">
+        <div class="signin-signup">
+            <form action="{% url 'signin' %}" method="POST" class="sign-in-form">
+                {% csrf_token %}
+                <h2 class="title">Sign in</h2>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="email" name="email">
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="password" name="password"> 
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="message {{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                <input type="submit" value="login" class="btn">
+               
+            </form>
+            <form action="{% url 'signup' %}" method="POST" class="sign-up-form">
+                {% csrf_token %}
+                <h2 class="title">Sign up</h2>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="username" name="name" required>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" placeholder="email" name="email" required>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="password" id="password" name="password" required>
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
+                
+                <input type="submit" value="Next" class="btn">
+                <p class="account-text">Already have a account? <a href="#" id="sign-in-btn2">Sign-in</a></p>
+            </form>        
+        </div>
+        <div class="panels-container">
+            <div class="panel left-panel">
+                <div class="content">
+                    <h3>Welcome Back!</h3>
+                    <p>Sign in to access your account and enjoy seamless MFA security</p>
+                    <button class="btn" id="sign-in-btn">Sign In</button>
+                </div>
+
+            </div>
+            <div class="panel right-panel">
+                <div class="content">
+                    <h3>Join Us Today!</h3>
+                    <p>Sign up to secure your account with Multi-Factor-Authentication</p>
+                    <button class="btn" id="sign-up-btn">Sign Up</button>
+                 </div>
+            </div>
+        </div>
+    </div>
+    <script src= "{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
