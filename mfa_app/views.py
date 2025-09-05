@@ -1,17 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-<<<<<<< HEAD
 from django.contrib.auth import login
 from .models import UserDetails
 from django.contrib.auth.hashers import make_password, check_password
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-=======
 from .models import UserDetails
-from django.contrib.auth.hashers import make_password, check_password
-from django.http import JsonResponse
 from rest_framework_simplejwt.tokens import RefreshToken
->>>>>>> origin/master
 from deepface import DeepFace
 from PIL import Image
 from tempfile import NamedTemporaryFile
@@ -20,11 +15,8 @@ import os
 def signup(request):
     if request.method == "POST":
         name = request.POST['name']
-<<<<<<< HEAD
         password = make_password(request.POST['password'])
-=======
         password = request.POST['password']
->>>>>>> origin/master
         email = request.POST.get('email')
             
         if UserDetails.objects.filter(name=name).exists():
@@ -33,15 +25,11 @@ def signup(request):
         if UserDetails.objects.filter(email=email).exists():
             messages.error(request, "Email already exists!")
             return redirect('signup')
-<<<<<<< HEAD
-
         user = UserDetails(name=name, password=password, email=email)
         user.save()
         request.session['user_email']=email
         return redirect('signup_camera')
     return render(request,'index.html',{"authentication_type":"signup"})
-
-=======
         is_valid, message = valid_password(password)
         if not is_valid:
             messages.error(request, message)
@@ -60,20 +48,14 @@ def signup(request):
         })
         return redirect('signup_camera')
     return render(request,'index.html',{"authentication_type":"signup"})
-
-
->>>>>>> origin/master
 def signup_camera(request):
     if request.method == "POST":
         email = request.session.get('user_email')
         captured_image = request.FILES.get('face-image',None)
         try:
             user = UserDetails.objects.get(email=email)
-<<<<<<< HEAD
             user.image.save(f"{user.name}_image.jpg", captured_image)
-=======
             user.image.save(f"{user.name}_image.png", captured_image)
->>>>>>> origin/master
             user.save()
             #return JsonResponse({"message": "Image saved successfully!"})
             return redirect(signin)
@@ -100,7 +82,6 @@ def signin_camera(request):
     if request.method == "POST":
         email = request.session.get('user_email')
         captured_image = request.FILES.get('face-image')
-<<<<<<< HEAD
         if not email:
             return JsonResponse({"message": "No email found in session"})
         
