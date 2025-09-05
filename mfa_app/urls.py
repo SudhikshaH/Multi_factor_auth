@@ -6,10 +6,6 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'), 
     path('signup_camera/', views.signup_camera, name='signup_camera'), 
     path('signin_camera/', views.signin_camera, name='signin_camera'),  
-<<<<<<< HEAD
-    path('home/', views.home, name='home'), 
-=======
-    path('home/', views.home, name='home'),
+    path('home/', views.home, name='home
     path('error/',views.error,name='error'), 
->>>>>>> origin/master
 ]
